@@ -13,9 +13,12 @@ REST API for personal task management built with Django REST Framework.
 - **Project** — organizes tasks by goal with timeline and automatic completion percentage
 - **Task** — single activity with status (today, this week, this month), working on flag and optional project link
 
-## API Endpoints
+## Authentication
 | Method | Endpoint | Description |
 |--------|----------|-------------|
+| POST | /api/auth/register/ | Register new user |
+| POST | /api/auth/login/ | Get JWT token |
+| POST | /api/auth/token/refresh/ | Refresh access token |
 | GET | /api/projects/ | List user projects |
 | POST | /api/projects/ | Create project |
 | GET | /api/projects/{id}/ | Project detail with tasks and completion % |
@@ -36,8 +39,8 @@ REST API for personal task management built with Django REST Framework.
 | project | ?project=1 | Tasks of a specific project |
 
 ## Status
-Phase 2 complete — serializers, ViewSets and filters working.
-JWT authentication coming next.
+Phase 3 complete — JWT authentication implemented.
+Permissions and ownership coming next.
 
 ## Local Setup
 ```bash

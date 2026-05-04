@@ -5,7 +5,6 @@ from .serializers import ProjectSerializer, TaskSerializer
 
 class ProjectViewSet(ModelViewSet):
     serializer_class = ProjectSerializer
-    permission_classes = [AllowAny] # TODO: replace with IsAuthenticated
 
     def get_queryset(self):
         return Project.objects.filter(owner=self.request.user)
@@ -15,7 +14,6 @@ class ProjectViewSet(ModelViewSet):
 
 class TaskViewSet(ModelViewSet):
     serializer_class = TaskSerializer
-    permission_classes = [AllowAny] # TODO: replace with IsAuthenticated
 
     
     def get_queryset(self):
