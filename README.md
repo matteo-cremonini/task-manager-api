@@ -4,9 +4,9 @@ REST API for personal task management built with Django REST Framework.
 
 ## Tech Stack
 - Python 3.12
-- Django 6.x
+- Django 6.0
 - Django REST Framework
-- JWT Authentication (coming soon)
+- JWT Authentication (djangorestframework-simplejwt)
 - PostgreSQL (production) / SQLite (development)
 
 ## Models
@@ -19,6 +19,10 @@ REST API for personal task management built with Django REST Framework.
 | POST | /api/auth/register/ | Register new user |
 | POST | /api/auth/login/ | Get JWT token |
 | POST | /api/auth/token/refresh/ | Refresh access token |
+
+## API Endpoints
+| Method | Endpoint | Description |
+|--------|----------|-------------|
 | GET | /api/projects/ | List user projects |
 | POST | /api/projects/ | Create project |
 | GET | /api/projects/{id}/ | Project detail with tasks and completion % |
@@ -38,9 +42,14 @@ REST API for personal task management built with Django REST Framework.
 | is_working_on | ?is_working_on=true | Active tasks only |
 | project | ?project=1 | Tasks of a specific project |
 
+## Security
+- JWT authentication required for all endpoints
+- Users can only access and modify their own data
+- Double protection: queryset filtering (404) + IsOwner permission (403)
+
 ## Status
-Phase 3 complete — JWT authentication implemented.
-Permissions and ownership coming next.
+Phase 4 complete — ownership permissions implemented.
+Testing with APITestCase coming next.
 
 ## Local Setup
 ```bash
