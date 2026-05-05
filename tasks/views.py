@@ -1,10 +1,12 @@
 from rest_framework.viewsets import ModelViewSet
-from rest_framework.permissions import AllowAny
+from .permissions import IsOwner
+from rest_framework.permissions import IsAuthenticated
 from .models import Project, Task
 from .serializers import ProjectSerializer, TaskSerializer
 
 class ProjectViewSet(ModelViewSet):
     serializer_class = ProjectSerializer
+    permission_classes = [IsAuthenticated, IsOwner]
 
     def get_queryset(self):
         return Project.objects.filter(owner=self.request.user)
@@ -14,6 +16,7 @@ class ProjectViewSet(ModelViewSet):
 
 class TaskViewSet(ModelViewSet):
     serializer_class = TaskSerializer
+    permission_classes = [IsAuthenticated, IsOwner]
 
     
     def get_queryset(self):
