@@ -48,8 +48,13 @@ REST API for personal task management built with Django REST Framework.
 - Double protection: queryset filtering (404) + IsOwner permission (403)
 
 ## Status
-Phase 4 complete — ownership permissions implemented.
-Testing with APITestCase coming next.
+Phase 6 complete — 17 automated tests passing (auth, CRUD, ownership, projects).
+Deploy on Railway coming next.
+
+## Testing
+```bash
+python manage.py test tasks
+```
 
 ## Local Setup
 ```bash
