@@ -11,12 +11,15 @@ class Project(models.Model):
     ]
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True)
-    timeline = models.CharField(max_length=20, choices=TIMELINE_CHOICES)
+    timeline = models.CharField(max_length=20, choices=TIMELINE_CHOICES, default='undefined')
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-          on_delete=models.CASCADE,
-          related_name='projects')
-    created_at = models.DateTimeField(auto_now_add=True)
+        on_delete=models.CASCADE,
+        related_name='projects')
+    created_at = models.DateTimeField(auto_now_add=True)    
+    
+    class Meta:
+        ordering = ['-created_at']
     
     
     def __str__(self):
@@ -26,7 +29,7 @@ class Project(models.Model):
         tasks_total = self.tasks.count()
         tasks_completed = self.tasks.filter(completed=True).count()
         percentage = (tasks_completed / tasks_total) * 100 if tasks_total > 0 else 0
-        return percentage
+        return round(percentage, 1)
         
 
 class Task(models.Model):
@@ -53,6 +56,8 @@ class Task(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        ordering = ['-created_at']
     
     def __str__(self):
         return self.title
