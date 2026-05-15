@@ -52,6 +52,7 @@ All requests use `Bearer {{access_token}}` via the collection Authorization tab.
 - Django REST Framework
 - JWT Authentication (djangorestframework-simplejwt)
 - PostgreSQL (production) / SQLite (development)
+- Docker + Nginx (local development)
 - Deployed on Railway
 
 ---
@@ -114,10 +115,13 @@ All requests use `Bearer {{access_token}}` via the collection Authorization tab.
 | 4 | IsOwner permission + queryset filtering | ✅ |
 | 5 | 17 automated tests — auth, CRUD, ownership | ✅ |
 | 6 | Deploy on Railway with PostgreSQL | ✅ |
+| 7 | Docker local environment (Django + PostgreSQL + Nginx) | ✅ |
 
 ---
 
 ## Local Setup
+
+**Standard**
 ```bash
 git clone https://github.com/matteo-cremonini/task-manager-api
 cd task-manager-api
@@ -125,9 +129,16 @@ cp .env.example .env   # fill in your values
 pipenv install
 pipenv shell
 python manage.py migrate
-python manage.py createsuperuser
 python manage.py runserver
 ```
+
+**Docker**
+```bash
+cp .env.example .env   # fill in your values
+docker compose up --build
+```
+
+Runs Django + PostgreSQL + Nginx. API available at `http://localhost`.
 
 ---
 
